@@ -7,7 +7,7 @@ import 'package:lottie/lottie.dart';
 
 import '../../Components/InputElement.dart';
 import '../../Components/ReusableButton.dart';
-import '../Home.dart';
+import '../firstScreen.dart';
 import 'SignUp.dart';
 
 class SignIn extends StatefulWidget {
@@ -26,7 +26,7 @@ void  ChangeScreen(){
   setState(() {
     isLoading =  true;
   });
-  Navigator.push(context, MaterialPageRoute(builder: (context)=>Home()));
+  Navigator.push(context, MaterialPageRoute(builder: (context)=>ControlScreen()));
 }
 
   @override

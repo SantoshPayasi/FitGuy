@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names, prefer_const_constructors, prefer_is_empty, avoid_print, file_names
+
 import 'package:email_validator/email_validator.dart';
 import 'package:fitness_support/FlutterMessages.dart';
 import 'package:fitness_support/commonStyles.dart';
@@ -8,7 +10,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../Components/InputElement.dart';
 import '../../Components/ReusableButton.dart';
-import '../Home.dart';
+import '../firstScreen.dart';
 import 'Signin.dart';
 
 class SignUp extends StatefulWidget {
@@ -25,14 +27,14 @@ class _SignUpState extends State<SignUp> {
   final TextEditingController ConfirmPassword = TextEditingController();
   final GlobalKey<FormState> _key = GlobalKey<FormState>();
   bool isLoading = false;
-  AuthenticateUser(String Name, String Email, String Password ){
-   setState(() {
-     isLoading = true;
-     Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>Home(name: Name)));
-   });
-   // Future.delayed(Duration(seconds: 2));
 
-
+  AuthenticateUser(String Name, String Email, String Password) {
+    setState(() {
+      isLoading = true;
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => ControlScreen()));
+    });
+    // Future.delayed(Duration(seconds: 2));
   }
 
   @override
@@ -135,7 +137,8 @@ class _SignUpState extends State<SignUp> {
                           ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(
                                   content: Text('Validated Successfully')));
-                              AuthenticateUser(Name.text, EmailController.text, PasswordController.text);
+                          AuthenticateUser(Name.text, EmailController.text,
+                              PasswordController.text);
                           if (kDebugMode) {
                             print("All of then are Validated");
                             print(EmailController.text);

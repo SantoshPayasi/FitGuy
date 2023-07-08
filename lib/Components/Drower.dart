@@ -1,3 +1,7 @@
+// ignore: file_names
+// ignore: file_names
+// ignore_for_file: non_constant_identifier_names, prefer_const_constructors, prefer_typing_uninitialized_variables, file_names, duplicate_ignore
+
 import 'package:fitness_support/Screens/Home.dart';
 import 'package:fitness_support/Screens/ProfileScreen.dart';
 import 'package:fitness_support/Screens/Schedules.dart';
@@ -6,6 +10,8 @@ import 'package:fitness_support/commonStyles.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import '../Screens/VedioScreen.dart';
 
 class Drower extends StatelessWidget {
   final String? Name;
@@ -41,7 +47,9 @@ class Drower extends StatelessWidget {
               Gap(20),
               RowList(icon: Icons.account_circle, Label: 'Profile'),
               Gap(20),
-              RowList(icon: Icons.subscriptions_outlined, Label: 'Subscriptions')
+              RowList(icon: Icons.subscriptions_outlined, Label: 'Subscriptions'),
+              Gap(20),
+              RowList(icon: Icons.video_stable, Label: 'VideoPlayer')
             ],
           ),
         )
@@ -94,5 +102,8 @@ void NavigateScreen(String Lable, String?name, context ){
   }
   if(Lable=='Subscriptions'){
     Navigator.push(context, MaterialPageRoute(builder: (context)=>const Subscriptions()));
+  }
+  if(Lable=='VideoPlayer'){
+    Navigator.push(context, MaterialPageRoute(builder: (context)=> VideoScreen()));
   }
 }
