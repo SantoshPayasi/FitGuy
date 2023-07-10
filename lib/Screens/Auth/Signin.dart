@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names, file_names, prefer_const_constructors
+
 import 'package:email_validator/email_validator.dart';
 import 'package:fitness_support/commonStyles.dart';
 import 'package:flutter/material.dart';
@@ -22,12 +24,19 @@ class _SignInState extends State<SignIn> {
   final TextEditingController PasswordController = TextEditingController();
   final GlobalKey<FormState> _key = GlobalKey<FormState>();
   bool isLoading = false;
-void  ChangeScreen(){
-  setState(() {
-    isLoading =  true;
-  });
-  Navigator.push(context, MaterialPageRoute(builder: (context)=>ControlScreen()));
-}
+
+  void ChangeScreen() {
+    setState(() {
+      isLoading = true;
+    });
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => ControlScreen()));
+    setState(() {
+      isLoading = false;
+      EmailController.clear();
+      PasswordController.clear();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -82,7 +91,7 @@ void  ChangeScreen(){
                       SubmitButton(
                         Lable: 'Sign In',
                         isLoading: isLoading,
-                        SubmitNow: () {
+                        SubmitNow: () async {
                           bool goodEmail = false;
                           bool goodPassword = false;
                           print('Key is presses');
@@ -102,15 +111,18 @@ void  ChangeScreen(){
                           }
 
                           if (goodPassword && goodEmail) {
-                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                                content: Text('Validated Successfully')));
+                            ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                    content: Text('Validated Successfully')));
+                            // Messages().animatedAlert(context, "Validated Successfully");
+                            Future.delayed(const Duration(seconds: 2));
                             ChangeScreen();
-
                           }
                           if (goodPassword == false && goodEmail == false) {
-                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                                content: Text(
-                                    'Please Enter Valid Email and Password')));
+                            ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                    content: Text(
+                                        'Please Enter Valid Email and Password')));
                             EmailController.clear();
                             PasswordController.clear();
                           }
@@ -127,20 +139,32 @@ void  ChangeScreen(){
                         },
                       ),
                       const Gap(20),
-                      const Text('Or', style: TextStyle(fontSize: 20, color: Colors.grey),),
+                      const Text(
+                        'Or',
+                        style: TextStyle(fontSize: 20, color: Colors.grey),
+                      ),
                       const Gap(4),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        children:  [
-                          const Text('Don\'t Have an account ?', style: TextStyle(fontSize: 18, color: Colors.grey),),
+                        children: [
+                          const Text(
+                            'Don\'t Have an account ?',
+                            style: TextStyle(fontSize: 18, color: Colors.grey),
+                          ),
                           GestureDetector(
-                            onTap: (){
-                              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>SignUp()));
+                            onTap: () {
+                              Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => SignUp()));
                             },
                             child: Container(
-                              margin: const EdgeInsets.only(left:2),
-                                child: const Text('Register Now', style: TextStyle(color: Colors.lightBlue, fontSize: 18),)
-                            ),
+                                margin: const EdgeInsets.only(left: 2),
+                                child: const Text(
+                                  'Register Now',
+                                  style: TextStyle(
+                                      color: Colors.lightBlue, fontSize: 18),
+                                )),
                           )
                         ],
                       )

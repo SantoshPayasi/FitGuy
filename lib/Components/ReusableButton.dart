@@ -1,9 +1,11 @@
+// ignore_for_file: file_names, non_constant_identifier_names, prefer_const_constructors
+
 import 'package:flutter/material.dart';
 
 class SubmitButton extends StatelessWidget {
   final String Lable;
   final Function SubmitNow;
-  final bool isLoading;
+  final bool isLoading ;
   const SubmitButton({Key? key, required this.Lable, required this.SubmitNow, required this.isLoading}) : super(key: key);
 
   @override

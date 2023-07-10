@@ -7,8 +7,8 @@ import '../Screens/PlayListSongs.dart';
 
 class playListspage extends StatefulWidget {
   final List<MusicDetails>? Songs;
-
-  const playListspage({Key? key, this.Songs}) : super(key: key);
+  final Function? ChangeselectedSongs;
+  const playListspage({Key? key, this.Songs, this.ChangeselectedSongs}) : super(key: key);
 
   @override
   State<playListspage> createState() => _playListState();
@@ -21,6 +21,7 @@ class _playListState extends State<playListspage> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
+      backgroundColor: Colors.indigo.shade100,
       body: Container(
         height: MediaQuery.of(context).size.height,
         child: Column(
@@ -36,9 +37,9 @@ class _playListState extends State<playListspage> {
                       style: TextStyle(color: Colors.grey),
                     ),
                     enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.indigo.shade100)),
+                        borderSide: BorderSide(color: Colors.indigo.shade200)),
                     focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.indigo.shade100))),
+                        borderSide: BorderSide(color: Colors.indigo.shade200))),
               ),
             ),
             Container(
@@ -65,30 +66,34 @@ class _playListState extends State<playListspage> {
               child: GestureDetector(
                 onTap: () {},
                 child: ListView.builder(
-                  itemBuilder: (context, index) => GestureDetector(
-                    onTap: () {
-                      if (widget.Songs != null) {
-                        Map<dynamic, dynamic> playlistdata = {
-                          "name": playlistName[index],
-                          "Songs": widget.Songs!
-                        };
-                        PlayListsArray.add(playlistdata);
-                        print(PlayListsArray);
-                      }
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => playListSongs(
-                                    UserName: playlistName[index],
-                                  )));
-                    },
-                    child: ListTile(
-                      tileColor: Colors.indigo.shade100,
-                      leading: Icon(
-                        Icons.play_arrow,
-                        color: Colors.indigo,
+                  itemBuilder: (context, index) => Container(
+                    margin: EdgeInsets.all(10),
+                    child: GestureDetector(
+                      onTap: () async {
+                        if (widget.Songs != null) {
+                          Map<dynamic, dynamic> playlistdata = {
+                            "name": playlistName[index],
+                            "Songs": widget.Songs!
+                          };
+                          PlayListsArray.add(playlistdata);
+                          print(PlayListsArray);
+                        }
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => playListSongs(
+                                      UserName: playlistName[index],
+                                    )));
+                      },
+                      child: ListTile(
+                        shape: RoundedRectangleBorder(borderRadius:BorderRadius.all(Radius.circular(10)) ),
+                        tileColor: Colors.indigo.shade200,
+                        leading: Icon(
+                          Icons.play_arrow,
+                          color: Colors.indigo,
+                        ),
+                        title: Text(playlistName[index]),
                       ),
-                      title: Text(playlistName[index]),
                     ),
                   ),
                   itemCount: playlistName.length,

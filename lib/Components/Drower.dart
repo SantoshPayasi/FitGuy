@@ -95,7 +95,7 @@ void NavigateScreen(String Lable, String?name, context ){
     Navigator.push(context, MaterialPageRoute(builder: (context)=>Home(name: name,)));
   }
   if(Lable=='Schedule'){
-    Navigator.push(context, MaterialPageRoute(builder: (context)=>const Schedules()));
+    Navigator.push(context, MaterialPageRoute(builder: (context)=> Schedules()));
   }
   if(Lable=='Profile'){
     Navigator.push(context, MaterialPageRoute(builder: (context)=>const ProfileScreen()));

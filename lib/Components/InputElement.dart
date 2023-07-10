@@ -1,3 +1,5 @@
+// ignore_for_file: file_names, non_constant_identifier_names, prefer_const_constructors
+
 import 'package:fitness_support/commonStyles.dart';
 import 'package:flutter/material.dart';
 
